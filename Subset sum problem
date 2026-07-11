@@ -1,0 +1,34 @@
+class Solution {
+
+    static Boolean isSubsetSum(int a[], int sum) {
+   int n=a.length;
+    int[][]dp=new int[n][sum+1];
+    for(int i=0;i<n;i++){
+        Arrays.fill(dp[i],-1);
+    }
+         return fun(a,a.length,0,sum,dp);
+    }
+   static  boolean fun(int[]a,int n,int i,int sum,int[][]dp){
+   
+       
+        if(i==n){
+            if(sum==0) return true;
+            return false;
+        }
+          if (dp[i][sum] != -1)
+            return dp[i][sum] == 1; 
+            
+         if (a[i] > sum) {
+            boolean ans = fun(a, n, i + 1, sum, dp);
+            dp[i][sum] = ans ? 1 : 0;
+            return ans;
+        }
+        
+        boolean c1=fun(a,n,i+1,sum-a[i],dp);
+        boolean c2=fun(a,n,i+1,sum,dp);
+        
+          dp[i][sum] = (c1 || c2) ? 1 : 0;
+        
+        return c1||c2;
+    }
+}
