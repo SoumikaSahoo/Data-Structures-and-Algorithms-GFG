@@ -13,11 +13,12 @@ class Solution {
             res=Math.max(res,room);
             i++;
         }else{
+            if(room>0){
             room--;
             j++;
         }
     }
-     
+    }
         return res;
     }
 }
